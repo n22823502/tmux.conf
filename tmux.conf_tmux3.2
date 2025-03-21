@@ -1,0 +1,57 @@
+
+# C-b is not acceptable -- Vim uses it
+set-option -g prefix C-a
+unbind C-b
+bind-key C-a last-window
+
+# reload config
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+
+# 設定窗口號從 1 開始（預設是 0）
+set -g base-index 1 # 设置窗口的起始下标为1
+set -g pane-base-index 1 # 设置面板的起始下标为1
+
+# 設定分割
+bind '\' split-window -h
+bind - split-window -v
+
+# 啟用鼠標支持
+set -g mouse on
+
+# 窗口命名顯示方式
+set-option -g automatic-rename on
+set-window-option -g automatic-rename on
+
+# 設定歷史記錄長度
+set-option -g history-limit 10000
+
+# 啟用 vim 風格的選擇模式
+setw -g mode-keys vi
+
+# 設定 tmux 使用 256 色
+set -g default-terminal "tmux-256color"
+
+setw -g monitor-activity on 
+
+
+# 狀態列樣式 (背景深色, 文字亮色)
+set -g status-bg colour236   # 深灰
+set -g status-fg colour148   # 淡綠色
+set -g status-right '#[fg=green,bg=default,bright]#(tmux-mem-cpu-load 1) uptime#[fg=green,dim,bg=default]#(uptime | cut -f 4-5 -d " " | cut -f 1 -d ",") #[fg=white,bg=default]%a%l:%M:%S %p#[default] #[fg=colour226]%Y-%m-%d'
+#set -g status-right "#(uptime -s) | %H:%M:%S"
+
+# 窗格邊框顏色
+#set -g pane-border-style fg=colour238
+#set -g pane-active-border-style fg=colour51  # 藍色邊框
+
+# 選擇模式 (複製/滑鼠選取時)
+setw -g mode-style bg=colour17,fg=colour226  # 黃色字，深藍底
+
+# 視窗標題高亮顯示
+setw -g window-status-format "#[fg=colour250]#I:#[fg=colour244]#W "
+setw -g window-status-current-format "#[bg=colour166] #[fg=colour255,bold]#I:#W "
+
+# 狀態列右側顯示時間
+#set -g status-right "#[fg=colour220]%Y-%m-%d #[fg=colour45]%H:%M:%S "
+
+
